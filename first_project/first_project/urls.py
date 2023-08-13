@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django_learning import views
+from practice_djnago.views import practice
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name = 'index'),
+    path('practice/', practice, name= 'practice'),
     path('learndjango/',views.learn_djnago, name='learn_django'),
     path('learnpython/',views.learn_python, name='learn_python'),
     path('learngithub/',views.learn_github, name='learn_github')
