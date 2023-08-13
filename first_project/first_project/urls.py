@@ -19,6 +19,7 @@ from django_learning import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index, name = 'index'),
     path('learndjango/',views.learn_djnago, name='learn_django'),
     path('learnpython/',views.learn_python, name='learn_python'),
     path('learngithub/',views.learn_github, name='learn_github')

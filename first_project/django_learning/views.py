@@ -3,6 +3,9 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 
+def index(request):
+    return HttpResponse('<h2> Home </h2></br><h2> Python </h2>')
+
 def learn_djnago(request):
     return HttpResponse('<h1> Hello Good Evening </h1>')
 
