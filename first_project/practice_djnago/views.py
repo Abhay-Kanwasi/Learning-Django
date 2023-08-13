@@ -4,5 +4,5 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def practice(request):
-    return HttpResponse("<h2>Practice makes a man perfect</h2>")
+    return render(request, "practice_django.html")
 
