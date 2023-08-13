@@ -21,8 +21,12 @@ from practice_djnago.views import practice
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name = 'index'),
-    path('practice/', practice, name= 'practice'),
-    path('learndjango/',views.learn_djnago, name='learn_django'),
-    path('learnpython/',views.learn_python, name='learn_python'),
-    path('learngithub/',views.learn_github, name='learn_github')
+    path('practice/', include([
+        path('practice/', practice, name= 'practice'),
+    ])),
+    path('learn/', include([
+        path('learndjango/',views.learn_djnago, name='learn_django'),
+        path('learnpython/',views.learn_python, name='learn_python'),
+        path('learngithub/',views.learn_github, name='learn_github'),
+    ]))
 ]
