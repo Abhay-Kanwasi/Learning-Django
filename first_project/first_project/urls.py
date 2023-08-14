@@ -21,5 +21,5 @@ from django_learning import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name = 'index'),
-    path('practice/', include('practice_django.urls'))
+    path('learn/', include('django_learning.urls'))
 ]

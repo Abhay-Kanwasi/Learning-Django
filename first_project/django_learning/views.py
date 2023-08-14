@@ -7,7 +7,7 @@ def index(request):
     return HttpResponse('<h2> Home </h2></br><h2> Python </h2>')
 
 def learn_djnago(request):
-    return HttpResponse('<h1> Hello Good Evening </h1>')
+    return render(request, 'learn/learn_django.html')
 
 def learn_python(request):
     return HttpResponse('<h1>Python.. Python.. Python...</h1>')
