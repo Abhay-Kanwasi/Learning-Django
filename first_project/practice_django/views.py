@@ -7,5 +7,5 @@ def practice(request):
     return render(request, "practice_django.html")
 
 def practice_django(request):
-    return HttpResponse("")
+    return HttpResponse("something")
 
