@@ -6,5 +6,5 @@ class Post(models.Model):
     author = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
 
-    def __str__(self):
+    def __str__(self): 
         return self.title
