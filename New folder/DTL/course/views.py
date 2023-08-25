@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-def learn_django(request):
+def variable_passing(request):
     course_name = 'Django Practice'
     about_course = 'This is a django course where we learn about Django Template Language because django is independent in case of front end because it\'s have it\'s own front end system which is DTL and we can also integrate frontend\'s like React, Angular etc.\nLet\'s get started...'
     course_duration = '3 Months'
@@ -11,4 +11,7 @@ def learn_django(request):
         'Course_Duration' : course_duration, 
         'Available_Seats' : available_seats
         }
-    return render (request,'course/courseone.html', learn_django_details)
+    return render (request,'course/variable_passing.html', learn_django_details)
+
+def filters(request):
+    return render (request, 'course/filters.html', {'name' : False})
