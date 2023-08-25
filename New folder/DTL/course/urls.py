@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
 
-url_pattern = [
+urlpatterns = [
     path("learn_django/",views.learn_django)    
 ]

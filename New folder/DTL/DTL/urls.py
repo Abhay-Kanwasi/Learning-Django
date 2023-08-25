@@ -15,9 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from DTL import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('DTL/', include("DTL.urls"))
+    path('course/', include("course.urls"))
 ]
