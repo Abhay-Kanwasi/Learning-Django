@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from datetime import datetime
 
 def variable_passing(request):
     course_name = 'Django Practice'
@@ -14,4 +15,9 @@ def variable_passing(request):
     return render (request,'course/variable_passing.html', learn_django_details)
 
 def filters(request):
-    return render (request, 'course/filters.html', {'name' : False})
+    return render (request, 'course/filters.html', {'name' : 'applying filter to this string to demonstrate filters in DTL'})
+    
+
+def time(request):
+    d = datetime.now()
+    return(request, "course/datetime.html", {'date' : d}) # We can't pass d because it takse dictionary as argument
