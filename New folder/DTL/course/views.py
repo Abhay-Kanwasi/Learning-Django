@@ -20,4 +20,4 @@ def filters(request):
 
 def time(request):
     d = datetime.now()
-    return(request, "course/datetime.html", {'date' : d}) # We can't pass d because it takse dictionary as argument
+    return render (request, "course/datetime.html", {'date' : d}) # We can't pass d because it takse dictionary as argument
