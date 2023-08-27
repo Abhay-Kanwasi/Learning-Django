@@ -19,5 +19,9 @@
     <h1>('capfirst' filter) Name : {{name | capfirst}}</h1>
     <h1>('defaul' filter) Name : {{name | default:'default python'}}</h1>
     <h1>('length' filter) Name : {{name | length}}</h1>
+    <h1>('slice' filter) Name : {{name | slice:'::-1'}}</h1>
+    <h1>('truncatechars' filter) Name : {{name |truncatechars:2}}</h1>
+    <h1>('truncatewords' filter) Name : {{name |truncatewords:2}}</h1>
+    <h1>('timedate' filter) Name : {{name | time:"TIME_FORMAT"}}</h1>
 </body>
 </html>
