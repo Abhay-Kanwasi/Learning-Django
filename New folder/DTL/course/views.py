@@ -15,9 +15,12 @@ def variable_passing(request):
     return render (request,'course/variable_passing.html', learn_django_details)
 
 def filters(request):
-    return render (request, 'course/filters.html', {'name' : 'applying filter to this string to demonstrate filters in DTL'})
+    return render (request, 'course/filters.html', {'name' : 'applying filter to this string to demonstrate filters in DTL', 'p1' : 56.24321, 'p2' : 56.00000, 'p3' : 56.37000})
     
 
 def time(request):
     d = datetime.now()
     return render (request, "course/datetime.html", {'date' : d}) # We can't pass d because it takse dictionary as argument
+
+def conditional(request):
+    return render()
