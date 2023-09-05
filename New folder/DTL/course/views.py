@@ -23,4 +23,8 @@ def time(request):
     return render (request, "course/datetime.html", {'date' : d}) # We can't pass d because it takse dictionary as argument
 
 def conditional(request):
-    return render()
+    return render(request, "course/conditional.html", {'name': 'Abhay', 'age' : 20, 'mageclass' : 'nooby'})
+
+def loop(request):
+    pass
+

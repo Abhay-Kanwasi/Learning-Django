@@ -7,6 +7,32 @@
     <title>Conditional Statements</title>
 </head>
 <body>
+    {% if name and age %}
+    <h2>Name is {{name}}</h2>
+    {% endif %}
+
+    {% if name and age and mageclass %}
+    <h3>Name is {{name}}<br/>
+        Age is {{age}}<br/>
+        Mageclass is {{mageclass}}<br/>
+    </h3>
+    {% endif %}
     
+    {% if name or name2 %}
+    <h3>
+        Name is {{name}}
+        Name two ha hi nahi
+    </h3>
+    {% endif %}
+
+    {% if name == 'Abhay' and age >= 21%}
+        <h3>
+            Condition satisfied
+        </h3>
+    {% else %}
+        <h3>
+            You are only allowed to enter when you get 21. You are only {{age}} now.
+        </h3>
+    {% endif %}
 </body>
 </html>
