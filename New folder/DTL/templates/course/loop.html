@@ -7,6 +7,55 @@
     <title>Looping</title>
 </head>
 <body>
+    <h1>Loops</h1>
+    <hr>
+
+    <p>Normal for loop</p>
+    {% for name in names %}
+        <li>
+            name : {{name}}
+        </li>
+    {% endfor %}
+
+
+    <p>For loop counter from 1</p>
+    {% for name in names %}
+        <p>
+            {{forloop.counter}}: {{name}} 
+        </p>
+    {% endfor %}
+    
+    <p>For loop counter from 0</p>
+    {% for name in names %}
+        <p>
+            {{forloop.counter0}} : {{name}} 
+        </p>
+    {% endfor %}
+
+    <p>For loop revcounter(reverse counter to 1)</p>
+    {% for name in names %}
+    <p>
+        {{forloop.revcounter}} : {{name}}
+    </p>
+    {% endfor %}
+    
+    <p>For loop revcounter(reverse counter to 0)</p>
+    {% for name in names %}
+    <p>
+        {{forloop.revcounter0}} : {{name}}
+    </p>
+    {% endfor %}
+
+    <p>For loop first (only first value will be true)</p>
+    {% for name in names %}
+        {{forloop.first}} : {{name}}
+    {% endfor %}
+
+    <p>For loop last (only last value will be true)</p>
+    {% for name in names %}
+        {{forloop.last}} : {{name}}
+    {% endfor %}
+
     
 </body>
 </html>

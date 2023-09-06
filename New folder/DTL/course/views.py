@@ -26,5 +26,20 @@ def conditional(request):
     return render(request, "course/conditional.html", {'name': 'Abhay', 'age' : 20, 'mageclass' : 'nooby'})
 
 def loop(request):
-    pass
+    student = {'names':['Abhay', 'Aman', 'Sohan', 'Mohan']}
+    return render(request, 'course/loop.html', student)
 
+def loop2(request):
+    students = {
+        'student1' : {'name' : 'Abhay', 'roll' : 1},
+        'student2' : {'name' : 'Abhay2', 'roll' : 2},
+        'student3' : {'name' : 'Abhay3', 'roll' : 3},
+        'student4' : {'name' : 'Abhay4', 'roll' : 4},
+    }
+    students_dictionary = {'students' : students}
+
+    # key value pair example
+    # data = {'name' : 'Rahul', 'rollno' : 12}
+    # return render(request, 'course/loop2.html','data' : data)
+
+    return render(request, 'course/loop2.html',students_dictionary)

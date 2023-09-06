@@ -7,4 +7,5 @@ urlpatterns = [
     path("filters/date", views.time), # we can make url according to us
     path("conditional/", views.conditional),
     path("loops/", views.loop),
+    path("loops2/", views.loop2),
 ]
