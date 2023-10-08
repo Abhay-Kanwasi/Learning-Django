@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+</head>
+<body>
+    <h1>Studnet Page</h1>
+    {% if stud %}
+        <h1>Show Data</h1>
+        {% for st in stud %}
+            <h5>{{st.stuid}}</h5>
+            <h5>{{st.stuname}}</h5>
+        {% endfor %}
+    {% else %}
+        <h1>No Data</h1>
+    {% endif %}
+</body>
+</html>

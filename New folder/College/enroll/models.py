@@ -6,4 +6,5 @@ class Student(models.Model):
     student_name = models.CharField(max_length=70)
     student_email = models.EmailField(max_length=70)
     student_password = models.CharField(max_length=70)
-    
+    comment = models.CharField(max_length=40, default='not available')
+
