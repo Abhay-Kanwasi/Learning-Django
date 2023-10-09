@@ -5,5 +5,5 @@ from enroll.models import Student
 # Create your views here.
 
 def studentinfo(request):
-    stud = Student.objects.all()
+    stud = Student.objects.get(pk=1)   
     return render(request, 'enroll/studetails.html', {'stud':stud})
