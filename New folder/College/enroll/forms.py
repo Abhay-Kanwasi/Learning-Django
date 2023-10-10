@@ -19,5 +19,25 @@ class StudentRegistration(forms.Form):
 
     # key = forms.CharField(widget=forms.HiddenInput())
 
-    name = forms.CharField(label="Name", label_suffix=' ', initial="Your Name", required=False, disabled=True, help_text="Maximum 70 character can be entered")
+    # name = forms.CharField(widget=forms.TextInput())
+
+    # password = forms.CharField(widget=forms.PasswordInput()) # in this field text will shown as password.
+
+    # hidden = forms.CharField(widget=forms.HiddenInput()) # this will hide this field
+
+    # text_area = forms.CharField(widget=forms.Textarea()) # this will provide text area
+
+    # checkbox = forms.CharField(widget=forms.CheckboxInput()) # give a check box
+
+    # file_input = forms.CharField(widget=forms.FileInput()) # Choose a file option
+
+    #######################################################################################
+
+    # css_class = forms.CharField(widget = forms.TextInput(attrs={'class' : 'inputcss', 'id' : 'uniqueid'}))
+
+    #######################################################################################
+
+    # 
+
     
+
