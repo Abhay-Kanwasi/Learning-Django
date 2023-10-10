@@ -29,7 +29,7 @@ class StudentRegistration(forms.Form):
 
     # checkbox = forms.CharField(widget=forms.CheckboxInput()) # give a check box
 
-    # file_input = forms.CharField(widget=forms.FileInput()) # Choose a file option
+    file_input = forms.CharField(widget=forms.FileInput()) # Choose a file option
 
     #######################################################################################
 
