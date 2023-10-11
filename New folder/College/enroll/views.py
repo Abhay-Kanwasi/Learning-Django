@@ -15,23 +15,37 @@ from django.http import HttpResponseRedirect
 #     fm.order_fields(field_order=['email','name'])
 #     return render(request, 'enroll/register.html', {'form':fm})
 
+#############################################################################
 
-def thankyou(request):
-    return render(request, 'enroll/sucess.html')
+# def thankyou(request):
+#     return render(request, 'enroll/sucess.html')
+
+# def showformdata(request):
+#     if request.method == "POST":
+#         fm = StudentRegistration(request.POST)
+#         if fm.is_valid():
+#             print("Form Validation")
+#             print('Name :', fm.cleaned_data['name'])
+#             print('Email :', fm.cleaned_data['email'])
+
+#             # method 1
+#             # return render(request, 'enroll/sucess.html',{'form':fm})
+
+#             # method 2
+#             return HttpResponseRedirect('/enroll/sucess/')
+#     else:
+#         fm = StudentRegistration()
+#     return render(request, 'enroll/register.html', {'form' : fm})
+
+###################################################################################
 
 def showformdata(request):
-    if request.method == "POST":
+   if request.method == "POST":
         fm = StudentRegistration(request.POST)
         if fm.is_valid():
-            print("Form Validation")
-            print('Name :', fm.cleaned_data['name'])
-            print('Email :', fm.cleaned_data['email'])
-
-            # method 1
-            # return render(request, 'enroll/sucess.html',{'form':fm})
-
-            # method 2
-            return HttpResponseRedirect('/enroll/sucess/')
-    else:
-        fm = StudentRegistration()
-    return render(request, 'enroll/register.html', {'form' : fm})
+            print('Form Validation')
+            print('Data :', fm.cleaned_data['data'])
+            print('Agree :', fm.cleaned_data['agree'])
+   else:
+       fm = StudentRegistration()
+   return render(request, 'enroll/register.html', {'form' : fm})

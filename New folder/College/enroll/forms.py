@@ -37,8 +37,14 @@ class StudentRegistration(forms.Form):
 
     #######################################################################################
 
-    name = forms.CharField()
-    email = forms.EmailField()
+    data = forms.CharField(min_length=5, max_length=30, strip=False)
+
+    # data = forms.CharField(empty_value='Sonam') # in case of empty value error message will not work
+
+    # data = forms.CharField(error_messages={'required':'Please enter your name'})
+
+
+    agree = forms.BooleanField(label="I agree", label_suffix=" ")
 
 
     
