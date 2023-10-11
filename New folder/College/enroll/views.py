@@ -15,5 +15,12 @@ from enroll.forms import StudentRegistration
 #     return render(request, 'enroll/register.html', {'form':fm})
 
 def showformdata(request):
-    fm = StudentRegistration()
+    if request.method == "POST":
+        fm = StudentRegistration(request.POST)
+        if fm.is_valid():
+            print("Form Validation")
+            print('Name :', fm.cleaned_data['name'])
+            print('Email :', fm.cleaned_data['email'])
+    else:
+        fm = StudentRegistration()
     return render(request, 'enroll/register.html', {'form' : fm})
