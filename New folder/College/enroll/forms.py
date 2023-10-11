@@ -44,6 +44,7 @@ class StudentRegistration(forms.Form):
     # data = forms.CharField(error_messages={'required':'Please enter your name'})
 
 
+    roll_number = forms.IntegerField(min_value=5)
     agree = forms.BooleanField(label="I agree", label_suffix=" ")
 
 

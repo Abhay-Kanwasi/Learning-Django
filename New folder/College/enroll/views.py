@@ -46,6 +46,7 @@ def showformdata(request):
             print('Form Validation')
             print('Data :', fm.cleaned_data['data'])
             print('Agree :', fm.cleaned_data['agree'])
+            print('Roll No. :', fm.cleaned_data['roll_number'])
    else:
        fm = StudentRegistration()
    return render(request, 'enroll/register.html', {'form' : fm})
