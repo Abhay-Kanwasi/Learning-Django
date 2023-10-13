@@ -4,6 +4,8 @@ from enroll.models import Student
 from enroll.forms import StudentRegistration
 from django.http import HttpResponseRedirect
 
+
+
 # Create your views here.
 
 # def studentinfo(request):
@@ -66,12 +68,16 @@ def showformdata(request):
     if request.method == "POST":
         fm = StudentRegistration(request.POST)
         if fm.is_valid():
-            print("Name ", fm.cleaned_data['name'])
-            print("Email ", fm.cleaned_data['email'])
-            print("Password", fm.cleaned_data['password'])
-            print("Password (again)", fm.cleaned_data['rpassword'])
+            sid = fm.cleaned_data['student_id']
+            name = fm.cleaned_data['student_name']
+            email = fm.cleaned_data['student_email']
+            password = fm.cleaned_data['student_password']
+            comment = fm.cleaned_data['comment']
+            student = Student(student_id=sid,student_name=name, student_email=email, student_password=password, comment=comment)
+            student.save()
     else:
         fm = StudentRegistration()
     return render(request, 'enroll/register.html', {'form':fm})
 
 #######################################################################################
+

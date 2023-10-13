@@ -5,12 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
+    <style>
+        .errorlist {
+            list-style-type: none;
+            color:red;
+            font-size:10px;
+            margin:0;
+            padding:0;
+        }
+    </style>
 </head>
 
 <body>
-    <form method="POST">
+    <form method="POST" novalidate>
         {% csrf_token %}
-        {{form.as_p}}
+        {{form.non_field_errors}}
+            {% for field in form  %}
+            <div>
+                {{field.label_tag}} {{field}} <span class='errorlist'>{{field.errors|striptags}}</span>
+            </div>
+            {% endfor %}
         <input type="submit" value="Submit">
     </form>
 </body>
