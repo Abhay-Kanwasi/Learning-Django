@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from enroll.models import Student
-from enroll.forms import StudentRegistration
+from enroll.models import Student, Faculty
+from enroll.forms import StudentRegistration, FacultyRegistration
 from django.http import HttpResponseRedirect
 
 
@@ -81,3 +81,34 @@ def showformdata(request):
 
 #######################################################################################
 
+def facultyform(request):
+    if request.method == "POST":
+        fm = FacultyRegistration(request.POST)
+        if fm.is_valid():
+            name = fm.cleaned_data['name']
+            email = fm.cleaned_data['email']
+            subject = fm.cleaned_data['subjects']
+            fid = fm.cleaned_data['fid'] 
+            slogan = fm.cleaned_data['slogan']
+            faculty = Faculty(faculty_name = name, faculty_email = email, faculty_subjects=subject, faculty_id = fid, faculty_slogan = slogan)
+            faculty.save()
+    else:
+        fm = FacultyRegistration()
+    return render(request, 'enroll/faculty.html',{'form':fm})
+
+###################################################################################
+def facultydeleteform(request):
+    if request.method == "POST":
+        fm = FacultyRegistration(request.POST)
+        if fm.is_valid():
+            name = fm.cleaned_data['name']
+            email = fm.cleaned_data['email']
+            subject = fm.cleaned_data['subjects']
+            fid = fm.cleaned_data['fid'] 
+            slogan = fm.cleaned_data['slogan']
+            # delete by id
+            faculty = Faculty(id=1)
+            faculty.delete()
+    else:
+        fm = FacultyRegistration()
+    return render(request, 'enroll/facultyd.html',{'form':fm})

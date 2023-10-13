@@ -5,5 +5,7 @@ urlpatterns = [
     # path('stu/',views.studentinfo),
     # path('register/',views.showformdata),
     path('data/',views.showformdata),
+    path('facultycorner/',views.facultyform),
+    path('facultydelete/',views.facultydeleteform)
     # path('sucess/', views.thankyou)
 ]

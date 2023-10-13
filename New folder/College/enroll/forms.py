@@ -131,3 +131,10 @@ class StudentRegistration(forms.Form):
     student_password = forms.CharField()
     comment = forms.CharField()
 
+class FacultyRegistration(forms.Form):
+    fid = forms.CharField(label="Faculty ID")
+    name = forms.CharField(label="Faculty Name")
+    email = forms.CharField(label="Faculty Email")
+    subjects = forms.CharField(label="Faculty Subjects")
+    slogan = forms.CharField(label="Faculty Slogan")
+    
