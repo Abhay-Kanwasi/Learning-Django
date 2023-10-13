@@ -97,11 +97,31 @@ class StudentRegistration(forms.Form):
     # name = forms.CharField(validators=[validators.MaxLengthValidator(10)])
     # email = forms.EmailField()
 
-####################################################################################
+######################################################################################
 
-    def starts_with_s(value):
-        if value[0] != 's':
-            raise forms.ValidationError('Name should starts with s')
+    # def starts_with_s(value):
+    #     if value[0] != 's':
+    #         raise forms.ValidationError('Name should starts with s')
     
-    name = forms.CharField(validators=[starts_with_s])
+    # name = forms.CharField(validators=[starts_with_s])
+    # email = forms.EmailField()
+
+########################################################################################
+
+    # match two fields
+
+    name = forms.CharField()
     email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
+    rpassword = forms.CharField(label='Password (agian)', widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        valpwd = self.cleaned_data['password']
+        valrpwd = self.cleaned_data['rpassword']
+        if valpwd != valrpwd:
+            raise forms.ValidationError('Password doesn\'t match')
+
+########################################################################################
+
+
