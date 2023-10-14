@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from enroll.models import Student, Faculty
-from enroll.forms import StudentRegistration, FacultyRegistration
+from enroll.models import Student, Faculty, Staff
+from enroll.forms import StudentRegistration, FacultyRegistration, StaffRegistrations
 from django.http import HttpResponseRedirect
 
 
@@ -81,34 +81,52 @@ def showformdata(request):
 
 #######################################################################################
 
-def facultyform(request):
-    if request.method == "POST":
-        fm = FacultyRegistration(request.POST)
-        if fm.is_valid():
-            name = fm.cleaned_data['name']
-            email = fm.cleaned_data['email']
-            subject = fm.cleaned_data['subjects']
-            fid = fm.cleaned_data['fid'] 
-            slogan = fm.cleaned_data['slogan']
-            faculty = Faculty(faculty_name = name, faculty_email = email, faculty_subjects=subject, faculty_id = fid, faculty_slogan = slogan)
-            faculty.save()
-    else:
-        fm = FacultyRegistration()
-    return render(request, 'enroll/faculty.html',{'form':fm})
+# def facultyform(request):
+#     if request.method == "POST":
+#         fm = FacultyRegistration(request.POST)
+#         if fm.is_valid():
+#             name = fm.cleaned_data['name']
+#             email = fm.cleaned_data['email']
+#             subject = fm.cleaned_data['subjects']
+#             fid = fm.cleaned_data['fid'] 
+#             slogan = fm.cleaned_data['slogan']
+#             faculty = Faculty(faculty_name = name, faculty_email = email, faculty_subjects=subject, faculty_id = fid, faculty_slogan = slogan)
+#             faculty.save()
+#     else:
+#         fm = FacultyRegistration()
+#     return render(request, 'enroll/faculty.html',{'form':fm})
 
-###################################################################################
-def facultydeleteform(request):
+# ###################################################################################
+# def facultydeleteform(request):
+#     if request.method == "POST":
+#         fm = FacultyRegistration(request.POST)
+#         if fm.is_valid():
+#             name = fm.cleaned_data['name']
+#             email = fm.cleaned_data['email']
+#             subject = fm.cleaned_data['subjects']
+#             fid = fm.cleaned_data['fid'] 
+#             slogan = fm.cleaned_data['slogan']
+#             # delete by id
+#             faculty = Faculty(id=1)
+#             faculty.delete()
+#     else:
+#         fm = FacultyRegistration()
+#     return render(request, 'enroll/facultyd.html',{'form':fm})
+
+###########################################################################
+
+def showstaffdata(request):
     if request.method == "POST":
-        fm = FacultyRegistration(request.POST)
+        fm = StaffRegistrations(request.POST)
         if fm.is_valid():
-            name = fm.cleaned_data['name']
-            email = fm.cleaned_data['email']
-            subject = fm.cleaned_data['subjects']
-            fid = fm.cleaned_data['fid'] 
-            slogan = fm.cleaned_data['slogan']
-            # delete by id
-            faculty = Faculty(id=1)
-            faculty.delete()
+            name = fm.cleaned_data['staff_name']
+            email = fm.cleaned_data['staff_email']
+            subject = fm.cleaned_data['staff_subjects']
+            fid = fm.cleaned_data['staff_id'] 
+            slogan = fm.cleaned_data['staff_slogan']
+            
+            staff = Staff(staff_name=name, staff_email=email, staff_subjects=subject, staff_id=fid, staff_slogan=slogan)
+            staff.save()
     else:
-        fm = FacultyRegistration()
-    return render(request, 'enroll/facultyd.html',{'form':fm})
+        fm = StaffRegistrations()
+    return render(request, 'enroll/staff.html', {'form': fm})

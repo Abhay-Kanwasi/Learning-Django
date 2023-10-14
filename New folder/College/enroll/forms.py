@@ -1,5 +1,6 @@
 from django import forms
 from django.core import validators
+from .models import Staff
 
 class StudentRegistration(forms.Form):
 
@@ -138,3 +139,12 @@ class FacultyRegistration(forms.Form):
     subjects = forms.CharField(label="Faculty Subjects")
     slogan = forms.CharField(label="Faculty Slogan")
     
+
+class StaffRegistrations(forms.ModelForm):
+    staff_name = forms.TextInput()
+    class Meta:
+        model = Staff
+        fields = ['staff_id', 'staff_name', 'staff_email', 'staff_subjects', 'staff_slogan']
+        labels = {'staff_id':'Your ID','staff_name' : 'Your Name', 'staff_email':"Your Email", 'staff_subjects':"Your Subjects", 'staff_slogan':"Your Slogan"}
+        error_messages = {'name':{'required':'Please! enter your name'}}
+        widgets = {'staff_id':forms.PasswordInput, 'staff_name':forms.TextInput(attrs={'placeholder': 'Enter your name'}), 'staff_email':forms.TextInput(attrs={'placeholder': 'Enter your email'}), 'staff_slogan':forms.TextInput(attrs={'placeholder': 'Enter your slogan'}), 'staff_id':forms.TextInput(attrs={'placeholder': 'Enter your id'}), 'staff_subjects':forms.Textarea(attrs={'placeholder': 'Enter your subjects'})}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Student, Faculty
+from .models import Student, Faculty, Staff
 
 # Register your models here.
 
@@ -9,5 +9,9 @@ class StudentAdmin(admin.ModelAdmin):
 class FacultyAdmin(admin.ModelAdmin):
     list_display = ('id', 'faculty_name', 'faculty_email', 'faculty_subjects', 'faculty_slogan')
 
+class StaffAdmin(admin.ModelAdmin):
+    list_display = ('id', 'staff_name', 'staff_email', 'staff_subjects', 'staff_slogan')
+
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Faculty, FacultyAdmin)
+admin.site.register(Staff, StaffAdmin)

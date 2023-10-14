@@ -21,3 +21,12 @@ class Faculty(models.Model):
     def __str__(self):
         return self.faculty_name
     
+class Staff(models.Model):
+    staff_name = models.CharField(max_length=30)
+    staff_id = models.IntegerField()
+    staff_email = models.EmailField()
+    staff_subjects = models.TextField()
+    staff_slogan = models.TextField()
+
+    def __str__(self):
+        return self.staff_name
