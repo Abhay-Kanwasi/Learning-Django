@@ -24,3 +24,7 @@ def show_subdetails(request,my_id, subid):
     if my_id == 3 and subid==3:
         student = {'id':my_id, 'name':'Aman Bisht', 'info':subid}
     return render(request, 'enroll/show.html',student)
+
+def show_session(request, year):
+    student = {'session' : year}
+    return render(request, 'enroll/session.html', student)
