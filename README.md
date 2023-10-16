@@ -9,3 +9,4 @@ Learning Django step by step.
 > Form API
 > Form Validation
 > Model Form
+> Message Framework
