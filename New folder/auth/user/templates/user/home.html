@@ -9,6 +9,15 @@
         .errors {
             color: red;
         }
+        .success {
+            color: yellow;
+        }
+        .warning {
+            color: orange;
+        }
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -19,5 +28,12 @@
         {% endfor %}
         <input type="submit" value="Submit">
     </form>
+    {% for message in messages  %}
+        <small {% if message.tags %} class="{{message.tags}}">
+            {{message}}
+        </small>
+    
+        {% endif %}
+    {% endfor %}
 </body>
 </html>
