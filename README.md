@@ -5,3 +5,8 @@ Learning Django step by step.
 > How to write view
 > DTL
 > jinja tempalting
+> ORM
+> Form API
+> Form Validation
+> Model Form
+> Message Framework
