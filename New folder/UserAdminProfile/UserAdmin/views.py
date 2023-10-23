@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import HttpResponseRedirect
+from django.contrib.auth.models import User
+
 
 from .forms import SignUpForm, EditUserProfileForm, EditAdminProfileForm
 
@@ -27,7 +28,7 @@ def user_login(request):
             user = authenticate(username = uname, password = password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/profile/')
+                return HttpResponseRedirect('/dashboard/')
             else:
                 messages.error(request, 'please enter the correct details')
     else:    
@@ -42,15 +43,31 @@ def user_logout(request):
 def user_profile(request):
     if request.user.is_authenticated:
         if request.method == "POST":
-            fm = EditUserProfileForm(request.POST, instance=request.user)
+            if request.user.is_superuser == True:
+                fm = EditAdminProfileForm(request.POST, instance= request.user)
+                users = User.objects.all()
+            else: 
+                fm = EditUserProfileForm(request.POST, instance=request.user)
+                users = None
             if fm.is_valid():
                 messages.success(request, 'Profile Updated !')
                 fm.save()
         else:
             if request.user.is_superuser == True:
                 fm = EditAdminProfileForm(instance=request.user)
+                users = User.objects.all()
             else:
                 fm = EditUserProfileForm(instance=request.user)
-        return render(request,'profile.html', {'name':request.user.username, 'form':fm})
+                users = None 
+        return render(request,'dashboard.html', {'name':request.user.username, 'form':fm, 'users':users})
     else:
-        return render(request, 'profile.html')
+        return render(request, 'dashboard.html')
+    
+
+def user_details(request, id):
+    if request.user.is_authenticated:
+        pi = User.objects.get(pk=id)
+        fm = EditUserProfileForm(instance=pi)
+        return render(request, 'userdetails.html', {'form':fm})
+    else:
+        return HttpResponseRedirect('/login/')

@@ -12,7 +12,7 @@ class EditUserProfileForm(UserChangeForm):
     password = None
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'date_joined', 'last_login', 'is_active']
+        fields = ['username', 'first_name', 'last_name', 'email', 'date_joined', 'last_login']
         labels = {'email':'Email'}
 
 class EditAdminProfileForm(UserChangeForm):
