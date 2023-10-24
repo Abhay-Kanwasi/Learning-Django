@@ -1,63 +1,22 @@
-{% extends 'base.html' %}
-
-{% block title %}Dashboard{% endblock title %}
-
-{% block profile %}
-<body class="bg-gray-100">
-    <div class="p-8 max-w-md mx-auto">
-        <h1 class="text-2xl font-semibold mb-4">Dashboard</h3>
-        </span></h1><hr>
-        <hr class="mb-4">
-        
-        {% if users %}
-            <h3 class="text-lg mb-2">List of Users</h3>
-            <table class="table-auto w-full">
-                <tbody>
-                    {% for user in users %}
-                        <tr>
-                            <td class="px-10 py-2">
-                                {{ user.username }}
-                            </td>
-                            <td class="px-11 py-2">
-                                <a href="{% url 'userdetails' user.id %}" class="text-indigo-600 hover:underline">details</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome</h2><br>
+        {% if perms.UserAdmin.delete_blog %}
+            <input type="button" value="Delete">
+        {% else %}
+        <h1>Delete nahi kar sakta h bhai tu</h1>
+        {% endif %}<br>
+        {% if perms.UserAdmin.add_blog %}
+            <input type="button" value="Add">
+        {% else %}
+        <h1>Add b nahi kar sakta h bhai tu</h1>
         {% endif %}
-
-        {% if messages %}
-        <div class="mb-4">
-                {% for message in messages %}
-                    <small {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</small>
-                {% endfor %}
-            </div>
-            {% endif %}
-            
-            <form action="" method="POST" novalidate>
-                {% csrf_token %}
-                {% if form.non_field_errors %}
-                <div class="mb-4">
-                    {% for error in form.non_field_errors %}
-                    <p class="text-red-500 text-xs">{{ error }}</p>
-                    {% endfor %}
-                </div>
-                {% endif %}
-                {% for fm in form %}
-                <div class="mb-4" class="w-full py-2 px-3 border rounded border-gray-300 focus:outline-none focus:border-indigo-600">
-                    <label for="{{ fm.id_for_label }}" class="block text-sm font-medium text-gray-600">{{ fm.label_tag }}</label>
-                    {{ fm  }}
-                    {% if fm.errors %}
-                    <p class="text-red-500 text-xs mt-1">{{ fm.errors|striptags }}</p>
-                    {% endif %}
-                </div>
-                {% endfor %}
-                <button type="submit" class="bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-700 w-full">Submit</button>
-            </form>
-            
-            <p class="mt-4"><a href="{% url 'logout' %}" class="text-indigo-600 hover:underline">Logout</a></p>
-        </div>
-    </body>
-{% endblock profile %}
-
+</body>
+</html>

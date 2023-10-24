@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 class SignUpForm(UserCreationForm):
     class Meta:
@@ -21,3 +21,8 @@ class EditAdminProfileForm(UserChangeForm):
         model = User
         fields = '__all__'
         labels = {'email':'Email'}
+
+class GroupForm(forms.Form):
+    class Meta:
+        model = Group
+        fields = "__all__"
