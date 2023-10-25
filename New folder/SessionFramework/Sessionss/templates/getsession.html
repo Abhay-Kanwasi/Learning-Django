@@ -8,8 +8,30 @@
 </head>
 <body>
     <h4>Get Session</h4>
-    {{name}}
-    {{lname}}
+    First Name : {{name}}<br>
+    Last Name : {{lname}}<br>
+    <br><br>
+    Keys are : 
+    {% for key in keys %}
+        {{key}}
+    {% endfor %}
+    <br><br>
+    Values are : 
+    {% for value in values %}
+        {{value}}
+    {% endfor %}
+    <br><br>
+    <hr><br>
+    Keys : Values <br>
+    {% for key, value in items %}
+        {{key}} : {{value}}<br>
+    {% endfor %}
+    <br><br>
+    Session age : {{session_age}}seconds<br><br>
+    Expiry age : {{expiry_age}}seconds<br><br>
+    Expiry date : {{expiry_date}}<br><br>
+    Is session expire when browser get close : {{check_on_browser_close}}<br><br>
+
     {% if messages %}
         {% for message in messages %}
             {{message}}
