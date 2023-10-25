@@ -46,3 +46,14 @@ def delsession(request):
     return render(request, 'delsession.html')
 
 
+def settestcookie(request):
+    request.session.set_test_cookie()
+    return render(request, 'settestcookie.html')
+
+def checktestcookie(request):
+    test = request.session.test_cookie_worked()
+    return render(request, 'checktestcookie.html', {'test':test})
+
+def deltestcookie(request):
+    request.session.delete_test_cookie()
+    return render(request, 'deltestcookie.html')

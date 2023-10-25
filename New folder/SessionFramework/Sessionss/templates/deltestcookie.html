@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Session Section</title>
+    <title>Test Cookie | Delete</title>
 </head>
 <body>
-    <h3>Operations</h3>
-    <button><a href="{% url 'get' %}">get</a></button>
-    <button><a href="{% url 'set' %}">set</a></button>
-    <button><a href="{% url 'del' %}">del</a></button>
-    <br><br><hr><br>
+    <h2>Delete Test Cookie</h2>
+
+    <button><a href="{% url 'home' %}">home</a></button>
     <button><a href="{% url 'settestcookie' %}">settestcookie</a></button>
-    <button><a href="{% url 'deltestcookie' %}">deltestcookie</a></button>
     <button><a href="{% url 'checktestcookie' %}">checktestcookie</a></button>
 </body>
 </html>
