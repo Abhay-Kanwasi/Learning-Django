@@ -126,6 +126,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Session and Cookie default settings override
 
 # all of these sessions will add a new session not append in existing session
-SESSION_COOKIE_AGE = 400
-SESSION_COOKIE_NAME = 'sessionname' # by default it is sessionid
-SESSION_COOKIE_PATH = '/home' 
+# SESSION_COOKIE_AGE = 400
+# SESSION_COOKIE_NAME = 'sessionname' # by default it is sessionid
+# SESSION_COOKIE_PATH = '/home' 
+
+
+SESSION_COOKIE_AGE = 20
