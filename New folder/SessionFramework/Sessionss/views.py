@@ -14,14 +14,21 @@ def setsession(request):
    #request.session.set_expiry(0) # session expires when browser close
    return render(request, 'setsession.html')
 
+# for session timeout
+# def getsession(request):
+#     if 'name' in request.session:
+#         name = request.session.get('name') # can give default
+#         lname = request.session.get('lname')
+#         request.session.modified = True # add the time that we give for session timeout (it means if our session timeout time is 10sec and in that 10sec our session get some changes(even refresh ) it will give 10 more seconds for session timeout)
+#     else:
+#         return HttpResponse("Your session has expired !")
+#     return render(request, 'getsession.html', {'name':name, 'lname':lname})
+    
 def getsession(request):
-    if 'name' in request.session:
-        # name = request.session['name'] # give the key to know the value
-        name = request.session.get('name') # can give default
-        lname = request.session.get('lname')
-        request.session.modified = True # add the time that we give for session timeout (it means if our session timeout time is 10sec and in that 10sec our session get some changes(even refresh ) it will give 10 more seconds for session timeout)
-    else:
-        return HttpResponse("Your session has expired !")
+    # name = request.session['name'] # give the key to know the value
+    name = request.session.get('name') # can give default
+    lname = request.session.get('lname')
+        
     # methods
     # keys = request.session.keys()
     # values = request.session.values()

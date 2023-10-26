@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -130,5 +130,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # SESSION_COOKIE_NAME = 'sessionname' # by default it is sessionid
 # SESSION_COOKIE_PATH = '/home' 
 
+# For overide 20 sec session timeout
+# SESSION_COOKIE_AGE = 20
 
-SESSION_COOKIE_AGE = 20
+# For file based session (now data doesn't save in database instead it saves in file)
+SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+SESSION_FILE_PATH = os.path.join(BASE_DIR, 'Session')
