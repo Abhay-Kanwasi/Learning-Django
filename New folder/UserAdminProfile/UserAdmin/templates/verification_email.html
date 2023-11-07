@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Account Verification</title>
 </head>
 <body>
-
+    <p>Hi {{ user.username }}</p>
+    <p>Thank you for registering on out website. To complete your registration, please click the link to verify your email address:</p>
+    <a href="http://{{ domain }}{% url 'verify_email' uid token %}">Verify your email</a>
+    <p>If you did not register on our website, please disregard this email.</p>
+    <p>Thank you!</p>
 </body>
 </html>
