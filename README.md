@@ -10,3 +10,6 @@ Learning Django step by step.
 > Form Validation
 > Model Form
 > Message Framework
+> Sessions
+> Rest Framework
+> Cookies
