@@ -1,0 +1,88 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django migrations (ignore everything except __init__.py)
+**/migrations/
+!**/migrations/__init__.py
+
+# SQLite database
+db.sqlite3
+*.sqlite3
+
+# Environment variables
+.env
+.env.*
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+Env/
+
+# VSCode settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Media and static files (if generated at runtime)
+media/
+staticfiles/
+static/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Test results
+junit-*.xml
+
+# pip stuff
+pip-log.txt
+pip-delete-this-directory.txt
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pytest
+.pytest_cache/
+
+# Build artifacts
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Celery beat schedule files
+celerybeat-schedule
+celerybeat.pid
+
+# Gunicorn PID file
+gunicorn.pid
