@@ -1,9 +1,3 @@
-"""
-Model Relationships
-
-Django offers way to define the 3 most common types of database relationships.
-"""
-
 from django.db import models
 
 # Create your models here.
@@ -25,7 +19,11 @@ class Student(models.Model):
 # student1.save() # Inserts into the database.
 
 
-from django.db import models
+"""
+Model Relationships
+
+Django offers way to define the 3 most common types of database relationships.
+"""
 
 # Independent Models
 class Category(models.Model):
