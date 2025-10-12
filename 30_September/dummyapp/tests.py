@@ -6,7 +6,9 @@ from .models import Category, Pricing, Form, Services
 
 
 class ModelTest(TestCase):
-
+    """
+        Test cases for different models
+    """
     def setUp(self):
         self.category1 = Category.objects.create(name="Category1", is_active=True)
         self.category2 = Category.objects.create(name="Category2", is_active=False)
