@@ -8,7 +8,7 @@ class ModelDao:
         IN THIS CLASS ALL THE FUNCTIONS FOR TESTING ARE MADE
 
         - get_enable_categories_with_atleast_one_enabled_service()
-        This function will not take any parameters. It will give    you all enable categories with atleast one enable service.
+        This function will not take any parameters. It will give you all enable categories with atleast one enable service.
 
         - disassociate_category_from_service(service, category)
         In this function, 2 parameters are needed which will be the instances of the main model. You need to pass them in this function and it will disassociate given category from the given service if both exists.
@@ -20,9 +20,9 @@ class ModelDao:
         This function will get all categories along with all the services count that are associated with category.
 
         # Another method can be used
-        cateories_with_count = Category.objects.annotate(service_count = Count("services"))
-        print(cateories_with_count.values_list())
-        for category in cateories_with_count:
+        categories_with_count = Category.objects.annotate(service_count = Count("services"))
+        print(categories_with_count.values_list())
+        for category in categories_with_count:
         print(f"Category : {category.name} | Number of Services : {category.service_count}")
 
         - get_all_services_along_with_the_number_of_categories_associated()
