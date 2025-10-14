@@ -63,3 +63,28 @@ class ModelTests(TestCase):
         print("Test passed !")
 
     def test_case_for_create_form(self):
+        print("\nTesting creation of form")
+        form1_name = self.form1.name
+        form1_username = self.form1.username
+        form1_password = self.form1.password
+        form = Form.objects.create(name=form1_name, username=form1_username, password=form1_password)
+        print(f'Form created and values are: {form.__dict__}')
+        self.assertEqual(form.name, form1_name)
+        self.assertEqual(form1_username, form.username)
+        self.assertEqual(form1_password, form.password)
+        print("Test passed !")
+
+    def test_case_for_update_form(self):
+        print("\nTesting update of form")
+        name = "New Name"
+        username = "New UserName"
+        password = "New Password"
+        self.form1.name = name
+        self.form1.username = username
+        self.form1.password = password
+        print(f'Form updated and values are: {self.form1.__dict__}')
+        self.assertEqual(name, self.form1.name)
+        self.assertEqual(username, self.form1.username)
+        self.assertEqual(password, self.form1.password)
+        print("Test passed !")
+
