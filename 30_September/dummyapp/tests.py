@@ -6,7 +6,9 @@ Django set up a test environment for running the tests. It creates a separate da
 During the test execution, Django provides various assertion methods(e.g. assertEqual, assertTrue) that you can use to verify the expected behaviour of your code.
 """
 
+from django.db import transaction, IntegrityError
 from django.test import TestCase
+from decimal import Decimal
 from .models import Services, Category, Pricing, Form
 
 
@@ -87,4 +89,57 @@ class ModelTests(TestCase):
         self.assertEqual(username, self.form1.username)
         self.assertEqual(password, self.form1.password)
         print("Test passed !")
+
+    def test_case_for_delete_form(self):
+        print("\nTesting deletion of form")
+        form_name = self.form1.name
+        self.form1.delete()
+        with self.assertRaises(Form.DoesNotExist):
+            Form.objects.get(name=form_name)
+        print("Test passed !")
+
+    def test_case_for_create_price(self):
+        print("\nTesting creation of price")
+        print(Pricing.objects.all().values())
+        price = self.pricing1.price
+        is_active = self.pricing2.is_active
+        pricing = Pricing.objects.create(price=price, is_active=is_active)
+        self.assertEqual(price, pricing.price)
+        print("Test passed !")
+
+    def test_case_for_update_price(self):
+        print("\nTesting price update")
+        new_price = 21.8
+        self.pricing1.price = new_price
+        self.pricing1.save()
+        self.assertEqual(self.pricing1.price, new_price)
+        print("Test passed !")
+
+    def test_case_for_delete_price(self):
+        print("\nTesting price delete")
+        self.pricing1.delete()
+        with self.assertRaises(Pricing.DoesNotExist):
+            Pricing.objects.get(price=self.pricing1.price)
+
+    def test_unique_price_for_each_service(self):
+        print("\nTesting unique price per service")
+        with transaction.atomic():
+            with self.assertRaises(IntegrityError):
+                service = Services.objects.create(name='service', pricing=self.pricing1)
+        print("Test passed !")
+
+    def test_for_price_query_from_service(self):
+        print("\nTesting price query")
+        queried_service = Services.objects.get(pricing__price=2.0)
+        self.assertEqual(queried_service, self.service1)
+        print("Test passed !")
+
+    def test_case_for_creating_category(self):
+        print("\nTesting creation of category")
+        name = self.category1.name
+        is_active = self.category2.is_active
+        Category.objects.create(name=name, is_active=is_active)
+        self.assertTrue(Category.objects.filter(name=self.category1.name).exists())
+        self.assertEqual(name, self.category1.name)
+        self.assertEqual(is_active, self.category2.is_active)
 
