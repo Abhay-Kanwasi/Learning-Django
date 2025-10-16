@@ -9,12 +9,15 @@ During the test execution, Django provides various assertion methods(e.g. assert
 from django.db import transaction, IntegrityError
 from django.test import TestCase
 from decimal import Decimal
+
+from unicodedata import category
+
 from .models import Services, Category, Pricing, Form
 
 
 class ModelTests(TestCase):
     def setUp(self):
-        self.category1 = Category.objects.create(name='category1', is_active=True)
+        self.category1 = Category.objects.create(name='Category1', is_active=True)
         self.category2 = Category.objects.create(name="Category2", is_active=False)
         self.category3 = Category.objects.create(name="Category3", is_active=True)
         self.category4 = Category.objects.create(name="Category4", is_active=True)
@@ -25,6 +28,7 @@ class ModelTests(TestCase):
         self.pricing3 = Pricing.objects.create(price=4.6, is_active=False)
         self.pricing4 = Pricing.objects.create(price=5.0, is_active=True)
         self.pricing5 = Pricing.objects.create(price=5.0, is_active=False)
+        self.pricing6 = Pricing.objects.create(price=5.0, is_active=True)
 
         self.form1  = Form.objects.create(name='Form1', username='Form1User', password='Form1Password')
         self.form2 = Form.objects.create(name="Form2", username="Form2User", password="Form2Password")
@@ -142,4 +146,20 @@ class ModelTests(TestCase):
         self.assertTrue(Category.objects.filter(name=self.category1.name).exists())
         self.assertEqual(name, self.category1.name)
         self.assertEqual(is_active, self.category2.is_active)
+        print("Test passed !")
+
+    def test_case_for_creating_service(self):
+        print("\nTesting creation of service")
+        service = Services.objects.create(name='service', pricing=self.pricing6, description='description')
+        service.form.add(self.form1)
+        service.categories.add(self.category1)
+        self.assertTrue(service.categories.filter(name="Category1").exists())
+        print("Test passed !")
+
+    def test_remove_category1_from_service1(self):
+        print("\nTesting removing category from service1")
+        self.service1.categories.add(self.category1)
+        self.service1.categories.remove(self.category1)
+        self.assertFalse(self.service1.categories.filter(name="Category1").exists())
+        print("Test passed !")
 
