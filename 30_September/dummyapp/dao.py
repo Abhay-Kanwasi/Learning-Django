@@ -1,118 +1,49 @@
-from .models import Services, Category, Pricing, Form
-from django.db import models
-import json
+"""
+DAO (Data Access Object)
+
+Structural pattern that separates the business logic from data access logic.
+
+It acts as a middle layer:
+- Database/Models (Persistence layer)
+- Service/Business Layer (Where code logic lives)
+
+The main goal is to isolate the data-handling code -- so if your database, ORM or data source changes, your upper layer remain unaffected.
+
+How DAO fits in Django Project
+A Django project typically has:
+- models.py : defines ORM models.
+- views.py : handles HTTP requests/responses.
+- services.py : handles service/business logic (optional).
+- dao.py : handles direct database interactions (optional).
+
+DAO sits between models and service.
+
+Views -> Service Layer -> DAO Layer -> Model (DB)
 
 
-class ModelDao:
-    """
-        IN THIS CLASS ALL THE FUNCTIONS FOR TESTING ARE MADE
+Without DAO:
+- Remove ORM | Code Repetition (file path) | More files to modify
 
-        - get_enable_categories_with_atleast_one_enabled_service()
-        This function will not take any parameters. It will give you all enable categories with atleast one enable service.
+Example: Your service or views might do things like:
+         Employees.objects.filter(age__gt=25)
+         Employees.objects.create(name='Abhay', salary=30)
+    Here, data access logic mixed business logic.
 
-        - disassociate_category_from_service(service, category)
-        In this function, 2 parameters are needed which will be the instances of the main model. You need to pass them in this function and it will disassociate given category from the given service if both exists.
+With DAO:
+- You create a DAO class responsible for all database operations related to Employees.
 
-        - get_services_with_enable_categories()
-        This function will give you all the services who have active categories in it.
+DAO Responsibilities:
+- fetch_all_employees_data
+- fetch_employees_by_id
+- update_employee
 
-        - get_all_categories_along_with_the_numbers_of_services_associated()
-        This function will get all categories along with all the services count that are associated with category.
+Now you service layer will never directly call .objects.filter() or .create()
 
-        # Another method can be used
-        categories_with_count = Category.objects.annotate(service_count = Count("services"))
-        print(categories_with_count.values_list())
-        for category in categories_with_count:
-        print(f"Category : {category.name} | Number of Services : {category.service_count}")
+It will instead call:
+    EmployeesDAO.get_all_employees()
+    EmployeesDAO.create_employee()
 
-        - get_all_services_along_with_the_number_of_categories_associated()
-        This function will get all the services along with all the categories count that are associated with service.
+If someday you switch from Django ORM to raw SQL or another data source, you only need to change the code inside DAO, not elsewhere.
 
-    """
-
-    def get_all_services_with_active_prices():
-        services_with_active_price = Services.objects.filter(pricing__is_active=True)
-        return services_with_active_price
-
-    def get_all_active_prices():
-        enable_prices = Pricing.objects.filter(is_active=True)
-        return enable_prices
-
-    def get_enable_categories_with_atleast_one_enabled_service():
-        enable_categories = Category.objects.filter(is_active=True).filter(services__is_active=True).distinct()
-        return enable_categories
-
-    def disassociate_category_from_service(service_object, category_object):
-        service_object.categories.remove(category_object)
-        return service_object
-
-    def disassociate_form_from_service(service_object, form_object):
-        service_object.form.remove(form_object)
-        return service_object
-
-    def disassociate_form_from_service_by_name(service_name, form_name):
-        service_object = Services.objects.get(name=service_name)
-        form_object = Form.objects.get(name=form_name)
-        service_object.form.remove(form_object)
-        return service_object
-
-    def disassociate_form_from_service_by_id(service_id, form_id):
-        service_object = Services.objects.get(id=service_id)
-        form_object = Form.objects.get(name=form_id)
-        service_object.form.remove(form_object)
-        return service_object
-
-    def get_services_with_enable_categories():
-        services = Services.objects.filter(categories__is_active=True).distinct()
-        return services
-
-    def get_all_forms_along_with_the_number_of_services_associated():
-        forms = Form.objects.all()
-        form_dict = {}
-        for form in forms:
-            form_info = {
-                "name": form.name,
-                "username": form.username,
-                "password": form.password,
-                "services_count": form.services.count(),
-            }
-            form_dict[form.name] = form_info
-        return form_dict
-
-    def get_all_categories_along_with_the_numbers_of_services_associated():
-        categories = Category.objects.all()
-        list_of_categories = {}
-        for category in categories:
-            category_info = {
-                "name": category.name,
-                "is_active": category.is_active,
-                "services_count": category.services.count()
-            }
-            list_of_categories[category.name] = category_info
-        return list_of_categories
-
-    def get_all_services_along_with_the_number_of_form_associated():
-        services = Services.objects.all()
-        list_of_services = {}
-        for service in services:
-            service_info = {
-                "name": service.name,
-                "description": service.description,
-                "is_active": service.is_active,
-                "form_count": service.form.count()
-            }
-            list_of_services[service.name] = service_info
-        return list_of_services
-
-    def get_all_services_along_with_the_number_of_categories_associated():
-        services = Services.objects.all()
-        list_of_services = {}
-        for service in services:
-            service_info = {
-                "name": service.name,
-                "description": service.description,
-                "is_active": service.is_active,
-                "category_count": service.categories.count()
-            }
-            list_of_services[service.name] = service_info
-        return list_of_services
+FLOW: Views --> Service --> DAO --> Model ---> Database
+"""
