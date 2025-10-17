@@ -47,3 +47,46 @@ If someday you switch from Django ORM to raw SQL or another data source, you onl
 
 FLOW: Views --> Service --> DAO --> Model ---> Database
 """
+
+from .models import Services, Category, Pricing, Form
+
+class ModelDAO:
+    """
+        This DAO is made for all the database operations
+    """
+
+    def get_all_services_with_active_prices(self):
+        services_with_active_prices = Services.objects.filter(pricing__is_active=True)
+        return services_with_active_prices
+
+    def get_all_active_prices(self):
+        active_prices = Pricing.objects.filter(is_active=True)
+        return active_prices
+
+    def get_enable_categories_with_atleast_one_active_service(self):
+        enable_categories = Category.objects.filter(is_active=True).filter(services__is_active=True).distinct()
+        return enable_categories
+
+    def disassociate_category_from_service(self, category_object, service_object):
+        service_object.categories.remove(category_object)
+        return service_object
+
+    def disassociate_form_from_services(self, form_object, service_object):
+        service_object.forms.remove(form_object)
+        return service_object
+
+    def disassociate_form_from_service_by_name(self, service_name, form_name):
+        service = Services.objects.get(name=service_name)
+        form = Form.objects.get(name=form_name)
+        service.form.remove(form)
+        return service
+
+    def disassociate_form_from_service_by_id(self, service_id, form_id):
+        services = Services.objects.get(id=service_id)
+        form = Form.objects.get(id=form_id)
+        services.form.remove(form)
+        return services
+
+    def get_services_with_active_categories(self):
+        services_with_active_categories = Services.objects.filter(categories__is_active=True).distinct()
+        return services_with_active_categories
