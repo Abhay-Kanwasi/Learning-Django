@@ -8,9 +8,7 @@ During the test execution, Django provides various assertion methods(e.g. assert
 
 from django.db import transaction, IntegrityError
 from django.test import TestCase
-from decimal import Decimal
-
-from unicodedata import category
+from .dao import ModelDAO
 
 from .models import Services, Category, Pricing, Form
 

@@ -55,38 +55,83 @@ class ModelDAO:
         This DAO is made for all the database operations
     """
 
-    def get_all_services_with_active_prices(self):
+    @staticmethod
+    def get_all_services_with_active_prices():
         services_with_active_prices = Services.objects.filter(pricing__is_active=True)
         return services_with_active_prices
 
-    def get_all_active_prices(self):
+    @staticmethod
+    def get_all_active_prices():
         active_prices = Pricing.objects.filter(is_active=True)
         return active_prices
 
-    def get_enable_categories_with_atleast_one_active_service(self):
+    @staticmethod
+    def get_enable_categories_with_atleast_one_active_service():
         enable_categories = Category.objects.filter(is_active=True).filter(services__is_active=True).distinct()
         return enable_categories
 
-    def disassociate_category_from_service(self, category_object, service_object):
+    @staticmethod
+    def disassociate_category_from_service(category_object, service_object):
         service_object.categories.remove(category_object)
         return service_object
 
-    def disassociate_form_from_services(self, form_object, service_object):
+    @staticmethod
+    def disassociate_form_from_services(form_object, service_object):
         service_object.forms.remove(form_object)
         return service_object
 
-    def disassociate_form_from_service_by_name(self, service_name, form_name):
+    @staticmethod
+    def disassociate_form_from_service_by_name(service_name, form_name):
         service = Services.objects.get(name=service_name)
         form = Form.objects.get(name=form_name)
         service.form.remove(form)
         return service
 
-    def disassociate_form_from_service_by_id(self, service_id, form_id):
+    @staticmethod
+    def disassociate_form_from_service_by_id(service_id, form_id):
         services = Services.objects.get(id=service_id)
         form = Form.objects.get(id=form_id)
         services.form.remove(form)
         return services
 
-    def get_services_with_active_categories(self):
+    @staticmethod
+    def get_services_with_active_categories():
         services_with_active_categories = Services.objects.filter(categories__is_active=True).distinct()
         return services_with_active_categories
+
+    @staticmethod
+    def get_all_forms_along_with_the_number_of_services_associated():
+        forms = Form.objects.all()
+        form_data = {}
+        for form in forms:
+            form_data = {
+                'name': form.name,
+                'username': form.username,
+                'password': form.password,
+                'services count': form.services.count(),
+            }
+        return form_data
+
+    @staticmethod
+    def get_all_categories_along_with_the_numbers_of_services_associated():
+        categories = Category.objects.all()
+        form_data = {}
+        for category in categories:
+            form_data = {
+                'name': category.name,
+                'is_active': category.is_active,
+                'services count': category.services.count(),
+            }
+        return form_data
+
+    @staticmethod
+    def get_all_services_along_with_the_number_of_categories_associated():
+        services = Services.objects.all()
+        form_data = {}
+        for service in services:
+            form_data = {
+                'name' : service.name,
+                'description' : service.description,
+                'categories': service.categories.count(),
+            }
+        return form_data
