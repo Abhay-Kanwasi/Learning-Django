@@ -1,0 +1,67 @@
+<!-- profile.html -->
+{% extends 'dummyapp/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>User Profile</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">User Information</h5>
+
+            <table class="table">
+                <tr>
+                    <th>Username:</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Full Name:</th>
+                    <td>{{ user.get_full_name }}</td>
+                </tr>
+                <tr>
+                    <th>Staff Status:</th>
+                    <td>
+                        {% if user.is_staff %}
+                            <span class="badge bg-success">Staff</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Regular User</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Superuser:</th>
+                    <td>
+                        {% if user.is_superuser %}
+                            <span class="badge bg-danger">Superuser</span>
+                        {% else %}
+                            <span class="badge bg-secondary">No</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Date Joined:</th>
+                    <td>{{ user.date_joined|date:"M d, Y" }}</td>
+                </tr>
+                <tr>
+                    <th>Last Login:</th>
+                    <td>{{ user.last_login|date:"M d, Y H:i" }}</td>
+                </tr>
+                <tr>
+                    <th>Active Status:</th>
+                    <td>
+                        {% if user.is_active %}
+                            <span class="badge bg-success">Active</span>
+                        {% else %}
+                            <span class="badge bg-danger">Inactive</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

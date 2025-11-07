@@ -15,7 +15,7 @@ from django.http import HttpResponseRedirect
 # def showformdata(request):
 #     fm = StudentRegistration(auto_id='some_%s', label_suffix='')
 #     fm.order_fields(field_order=['email','name'])
-#     return render(request, 'enroll/register.html', {'form':fm})
+#     return render(request, 'enroll/profile.html', {'form':fm})
 
 #############################################################################
 
@@ -37,7 +37,7 @@ from django.http import HttpResponseRedirect
 #             return HttpResponseRedirect('/enroll/sucess/')
 #     else:
 #         fm = StudentRegistration()
-#     return render(request, 'enroll/register.html', {'form' : fm})
+#     return render(request, 'enroll/profile.html', {'form' : fm})
 
 ###################################################################################
 
@@ -60,7 +60,7 @@ from django.http import HttpResponseRedirect
 #             print("Agree ", fm.cleaned_data['agree'])
 #         else:
 #             fm = StudentRegistration()
-#     return render(request, 'enroll/register.html', {'form' : fm})
+#     return render(request, 'enroll/profile.html', {'form' : fm})
 
 ###################################################################################
 
@@ -77,7 +77,7 @@ def showformdata(request):
             student.save()
     else:
         fm = StudentRegistration()
-    return render(request, 'enroll/register.html', {'form':fm})
+    return render(request, 'enroll/profile.html', {'form':fm})
 
 #######################################################################################
 

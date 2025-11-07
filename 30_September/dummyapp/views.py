@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from django.http import JsonResponse
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 
 # Create your views here.
 def home(request):
@@ -32,3 +33,51 @@ def about(request):
         ]
     }
     return render(request, 'dummyapp/about.html', context)
+
+def register_default_user(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+
+        try:
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+                first_name=first_name,
+                last_name=last_name
+            )
+            return redirect('home')
+        except Exception as error:
+            return render(request, 'dummyapp/profile.html', {'error': error})
+    return render(request, 'dummyapp/profile.html')
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            redirect('home')
+        else:
+            print('Login failed')
+    return render(request, 'dummyapp/login.html')
+
+
+def user_profile(request):
+    user = User.objects.get(id=2)
+    context = {
+        'user' : user,
+        'full_name' : user.get_full_name(),
+        'email' : user.email,
+        'username' : user.username,
+        'last_login' : user.last_login,
+        'date_joined' : user.date_joined,
+    }
+    return render(request, 'dummyapp/profile.html', context)
