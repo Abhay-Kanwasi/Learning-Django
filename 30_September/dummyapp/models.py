@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Product(models.Model):
@@ -74,3 +75,28 @@ class Services(models.Model):
 
     def __str__(self):
         return self.name
+
+class CustomUser(AbstractUser):
+    phone_number = models.CharField(max_length=15)
+    date_of_birth = models.DateField(null=True, blank=True)
+    profile_picture = models.ImageField(upload_to="profiles/", null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+
+    # boolean fields
+    is_verified = models.BooleanField(default=False)
+    is_premium = models.BooleanField(default=False)
+
+    # timestamps
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def get_display_name(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        return f"{self.username}"
+
+    def has_premium_access(self):
+        return True if self.is_premium else False

@@ -1,8 +1,9 @@
 from datetime import datetime
 
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+
+from .models import CustomUser
 
 # Create your views here.
 def home(request):
@@ -43,7 +44,7 @@ def register_default_user(request):
         last_name = request.POST['last_name']
 
         try:
-            user = User.objects.create_user(
+            user = CustomUser.objects.create_user(
                 username=username,
                 email=email,
                 password=password,
@@ -71,7 +72,11 @@ def login_user(request):
 
 
 def user_profile(request):
-    user = User.objects.get(id=2)
+    user = CustomUser.objects.get(id=1)
+    print(user)
+
+    print(f'get user display {user.get_display_name()}')
+    print(f'has premium access {user.has_premium_access()}')
     context = {
         'user' : user,
         'full_name' : user.get_full_name(),
@@ -79,5 +84,7 @@ def user_profile(request):
         'username' : user.username,
         'last_login' : user.last_login,
         'date_joined' : user.date_joined,
+        'phone_number' : user.phone_number,
     }
+    print(context)
     return render(request, 'dummyapp/profile.html', context)

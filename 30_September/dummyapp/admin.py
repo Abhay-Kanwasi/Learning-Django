@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product
+from .models import Product, CustomUser
 
 # Register your models here.
 
@@ -22,3 +22,4 @@ class ProductAdmin(admin.ModelAdmin):
         self.message_user(request, 'Products made available')
 
 admin.site.register(Product, ProductAdmin)
+admin.site.register(CustomUser)

@@ -1,0 +1,39 @@
+{% extends 'dummyapp/base.html' %}
+
+{% block title %}Home - My Site{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to My Site!</h1>
+    <p class="lead">This is a simple Django template example.</p>
+    
+    <!-- Dynamic content from view -->
+    <h2>{{ welcome_message }}</h2>
+    <p>Current time: {{ current_time }}</p>
+    
+    <!-- Conditional display -->
+    {% if  condition == False %}
+        <p>Hello, {{ user }}! <a href="{% url 'about' %}">About</a></p>
+    {% else %}
+        <p><a href="{% url 'about' %}">Login</a> to access more features.</p>
+    {% endif %}
+</div>
+
+<!-- Loop example -->
+<div class="row">
+    {% for item in items %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="card-text">{{ item.description }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <p>No items available.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
