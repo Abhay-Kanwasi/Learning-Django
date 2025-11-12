@@ -100,3 +100,13 @@ class CustomUser(AbstractUser):
 
     def has_premium_access(self):
         return True if self.is_premium else False
+
+
+class Article(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.title

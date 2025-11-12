@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
 from .models import CustomUser
+from .forms import ContactForm, ArticleForm
 
 # Create your views here.
 def home(request):
@@ -88,3 +89,27 @@ def user_profile(request):
     }
     print(context)
     return render(request, 'dummyapp/profile.html', context)
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid(): # data is valid
+            name = form.cleaned_data['name'] # safe, cleaned data to use
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+        return False
+
+    else:
+        return False
+
+def create_article(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()  # Saves to database automatically
+            return redirect('home')
+    else:
+        form = ArticleForm()
+    return render(request, 'dummyapp/create_article.html', {'form': form})

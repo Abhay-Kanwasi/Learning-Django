@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Article</title>
+</head>
+<body>
+    <h1>Write a new article</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        {% if form.errors %}
+            <div style="color: red;">
+                Please correct the error below
+            </div>
+        {% endif %}
+        <button type="submit">Publish</button>
+    </form>
+</body>
+</html>
