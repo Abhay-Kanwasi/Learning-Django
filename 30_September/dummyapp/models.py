@@ -110,3 +110,12 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Employee(models.Model):
+    name = models.CharField(max_length=255)
+    age = models.IntegerField()
+
+class Salary(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    salary = models.IntegerField()
